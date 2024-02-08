@@ -312,7 +312,7 @@ return [
         // Sidebar items:
 
         [
-            'text'      => 'Gestionar Inventario',
+            'text'      => 'Gestionar Bienes',
             'icon'      => 'fas fa-fw fa-boxes',
             'can'       => ['etiquetas'],
             'submenu' => [

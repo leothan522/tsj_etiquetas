@@ -12,7 +12,11 @@
                 <button class="btn btn-tool" wire:click="destroy({{ $cliente_id }})"><i class="fas fa-trash-alt"></i> Eliminar</button>
                 <button class="btn btn-tool" wire:click="limpiar"><i class="fas fa-ban"></i> Cancelar</button>
             @else
-                <span class="btn btn-tool"><i class="fas fa-file"></i></span>
+                <button class="btn btn-tool"><i class="fas fa-file"></i> Nuevo</button>
+                <button class="btn btn-tool"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-tool"><i class="fas fa-ban"></i> Cancelar</button>
+                <button class="btn btn-tool"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                <button class="btn btn-tool"><i class="fas fa-print"></i> Imprimir Etiqueta</button>
             @endif
 
         </div>
@@ -20,8 +24,8 @@
 
     <div class="card-body">
 
-
-        <form wire:submit.prevent="save">
+        @include('dashboard.etiquetas.form_articulos')
+        {{--<form wire:submit.prevent="save">
 
             <div class="form-group">
                 <div class="input-group mb-3">
@@ -191,7 +195,7 @@
                 <input type="submit" class="btn btn-block @if($nuevo) btn-success @else btn-primary @endif" value="Guardar @if($editar) Cambios @endif">
             </div>
 
-        </form>
+        </form>--}}
 
     </div>
 

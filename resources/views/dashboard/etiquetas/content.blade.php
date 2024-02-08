@@ -1,9 +1,9 @@
 <div class="row justify-content-center">
-    <div class="col-md-7">
-        {{--@include('dashboard.clientes.card_table')--}}
+    <div class="col-md-4">
+        @include('dashboard.etiquetas.card_table')
     </div>
-    <div class="col-md-5">
-        {{--@include('dashboard.clientes.card_form')--}}
+    <div class="col-md-8">
+        @include('dashboard.etiquetas.card_form')
     </div>
-
 </div>
+@include('dashboard.etiquetas.categorias.modal')

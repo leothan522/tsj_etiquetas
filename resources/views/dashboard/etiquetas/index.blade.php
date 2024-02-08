@@ -11,7 +11,7 @@
 @endsection
 
 @section('right-sidebar')
-    @include('dashboard.right-sidebar')
+    @include('dashboard.etiquetas.right-sidebar')
 @endsection
 
 @section('footer')
