@@ -96,11 +96,11 @@ class EtiquetasComponent extends Component
         $articulo->adicional = $this->adicional;
 
         if ($this->imagen) {
-            $ruta = $this->imagen->store("public/articulos/$this->identificador");
+            $ruta = $this->imagen->store("public/articulos");
             $articulo->imagen = str_replace('public/', 'storage/', $ruta);
             //miniaturas
-            $nombre = explode("articulos/$this->identificador/", $articulo->imagen);
-            $path_data = "storage/articulos/$this->identificador/size_" . $nombre[1];
+            $nombre = explode("articulos/", $articulo->imagen);
+            $path_data = "storage/articulos/size_" . $nombre[1];
             $miniatura = crearMiniaturas($articulo->imagen, $path_data);
             $articulo->mini = $miniatura['mini'];
             $articulo->detail = $miniatura['detail'];
@@ -117,7 +117,7 @@ class EtiquetasComponent extends Component
         }
         //borramos imagenes anteriones si existen
         if ($this->borrar_imagen){
-            borrarImagenes($this->borrar_imagen, $this->borrar_path);
+            borrarImagenes($this->borrar_imagen, 'articulos');
         }
 
 
