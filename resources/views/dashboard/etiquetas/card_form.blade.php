@@ -48,23 +48,6 @@
 
     </div>
 
-    {{--{!! verSpinner() !!}--}}
-
-    <div class="overlay-wrapper" wire:loading
-         wire:target="cerrarBusqueda, saveArticulos, destroy, confirmed">
-        <div class="overlay">
-            <div class="spinner-border text-navy" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="overlay-wrapper d-none cargar_buscar">
-        <div class="overlay">
-            <div class="spinner-border text-navy" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-    </div>
+    {!! verSpinner() !!}
 
 </div>
