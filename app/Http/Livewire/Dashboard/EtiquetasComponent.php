@@ -60,7 +60,7 @@ class EtiquetasComponent extends Component
     protected function rules()
     {
         return [
-            'identificador' => ['required', 'min:4', 'max:12', 'alpha_num:ascii', Rule::unique('articulos', 'identificador')->ignore($this->articulos_id)],
+            'identificador' => ['required', 'min:4', 'max:40', 'alpha_num:ascii', Rule::unique('articulos', 'identificador')->ignore($this->articulos_id)],
             'descripcion' => 'required|min:4|max:40',
             'categorias_id' => 'required',
             'procedencias_id' => 'required',

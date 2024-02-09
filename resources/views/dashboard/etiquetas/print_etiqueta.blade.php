@@ -6,12 +6,12 @@
 
     <div class="row m-3">
         <div class="col-12 text-bold">
-            Bien Nacional del T.S.J <br>
+            Bien Nacional del T.S.J. <br>
             TSJ-XXX-JJJJ-LLLL-NNNN
         </div>
         <div class="row mt-3">
             <div class="col-6 text-center">
-                Consulta Local
+                <p>Consulta Local</p>
                 <hr>
                 {!! QrCode::size(150)->generate($texto); !!}
             </div>
