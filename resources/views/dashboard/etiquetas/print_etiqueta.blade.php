@@ -4,25 +4,22 @@
 
 @section('content')
 
-
-    <div class="card card-navy">
-        <div class="card-header">
-            <h3 class="card-title">
-                BIENES TSJ
-            </h3>
+    <div class="row m-3">
+        <div class="col-12 text-bold">
+            Bien Nacional del T.S.J <br>
+            TSJ-XXX-JJJJ-LLLL-NNNN
         </div>
-        <div class="card-body">
-            {!! QrCode::size(150)->generate($texto); !!}
-        </div>
-    </div>
-    <div class="card card-navy">
-        <div class="card-header">
-            <h3 class="card-title">
-                CONSULTA EN LINEA
-            </h3>
-        </div>
-        <div class="card-body">
-            {!! QrCode::size(150)->generate($url); !!}
+        <div class="row mt-3">
+            <div class="col-6 text-center">
+                Consulta Local
+                <hr>
+                {!! QrCode::size(150)->generate($texto); !!}
+            </div>
+            <div class="col-6 text-center">
+                Consulta en Linea
+                <hr>
+                {!! QrCode::size(150)->generate($url); !!}
+            </div>
         </div>
     </div>
 
