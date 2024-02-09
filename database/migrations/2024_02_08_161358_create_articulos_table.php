@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('articulos', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo')->unique();
+            $table->string('identificador')->unique();
             $table->string('descripcion');
             $table->bigInteger('categorias_id')->unsigned()->nullable();
             $table->bigInteger('procedencias_id')->unsigned()->nullable();
@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('modelo')->nullable();
             $table->string('serial')->nullable();
             $table->string('color')->nullable();
-            $table->string('identificador')->nullable();
             $table->text('adicional')->nullable();
             $table->text('imagen')->nullable();
             $table->text('mini')->nullable();

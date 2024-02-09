@@ -6,4 +6,3 @@
         @include('dashboard.etiquetas.card_form')
     </div>
 </div>
-@include('dashboard.etiquetas.categorias.modal')

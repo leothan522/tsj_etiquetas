@@ -1,12 +1,12 @@
 <div class="card card-outline card-navy" xmlns:wire="http://www.w3.org/1999/xhtml">
     <div class="card-header">
         <h3 class="card-title">
-            @if(/*$keywordCategorias*/false)
-                Resultados de la Busqueda { <b class="text-danger">{{ $keywordCategorias }}</b> }
-                <button class="btn btn-tool text-danger" {{--wire:click="limpiarCategorias"--}}><i class="fas fa-times-circle"></i>
+            @if($keyword)
+                Resultados de la Busqueda { <b class="text-danger">{{ $keyword }}</b> }
+                <button class="btn btn-tool text-danger" wire:click="limpiarCategorias"><i class="fas fa-times-circle"></i>
                 </button>
             @else
-                Categorias Registradas [ <b class="text-navy">{{--{{ $rowsCategorias }}--}}</b> ]
+                Categorias Registradas [ <b class="text-navy">{{ $rows }}</b> ]
             @endif
         </h3>
 
@@ -27,20 +27,20 @@
             </tr>
             </thead>
             <tbody>
-            {{--@if($listarCategorias->isNotEmpty())
-                @foreach($listarCategorias as $categoria)
+            @if($listarRows->isNotEmpty())
+                @foreach($listarRows as $categoria)
                     <tr>
                         <td>{{ $categoria->codigo }}</td>
                         <td>{{ $categoria->nombre }}</td>
                         <td class="text-center">{{ formatoMillares($categoria->cantidad, 0) }}</td>
                         <td class="justify-content-end">
                             <div class="btn-group">
-                                <button wire:click="editCategoria({{ $categoria->id }})" class="btn btn-primary btn-sm"
-                                @if(!comprobarPermisos('categorias.edit')) disabled @endif >
+                                <button wire:click="edit({{ $categoria->id }})" class="btn btn-primary btn-sm"
+                                @if(!comprobarPermisos('categorias.create')) disabled @endif >
                                     <i class="fas fa-edit"></i>
                                 </button>
 
-                                <button wire:click="destroyCategoria({{ $categoria->id }})" class="btn btn-primary btn-sm"
+                                <button wire:click="destroy({{ $categoria->id }})" class="btn btn-primary btn-sm"
                                 @if(!comprobarPermisos('categorias.destroy')) disabled @endif >
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
@@ -54,7 +54,7 @@
                         <span>Aún se se ha creado una Categoria.</span>
                     </td>
                 </tr>
-            @endif--}}
+            @endif
 
             </tbody>
         </table>

@@ -130,7 +130,7 @@ function verImagen($path, $user = false)
         if ($user){
             return asset('img/user.png');
         }
-        return asset('img/image.png');
+        return asset('img/img_placeholder.png');
     }
 }
 

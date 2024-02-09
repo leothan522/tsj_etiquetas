@@ -21,4 +21,9 @@ class EtiquetasComponent extends Component
     {
         return view('livewire.dashboard.etiquetas-component');
     }
+    public function prueba()
+    {
+        $this->alert('success', 'Etiquetas');
+    }
+
 }

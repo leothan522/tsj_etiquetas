@@ -11,7 +11,7 @@ class Articulo extends Model
     use HasFactory;
     protected $table = "articulos";
     protected $fillable = [
-        'codigo',
+        'identificador',
         'descripcion',
         'categorias_id',
         'procedencias_id',
@@ -19,7 +19,6 @@ class Articulo extends Model
         'modelo',
         'serial',
         'color',
-        'identificador',
         'adicional',
         'imagen',
         'mini',

@@ -8,6 +8,7 @@
 
 @section('content')
     @livewire('dashboard.etiquetas-component')
+    @livewire('dashboard.categorias-component')
 @endsection
 
 @section('right-sidebar')
@@ -35,6 +36,10 @@
                 //Livewire.emit('increment', keyword);
             }
             return false;
+        }
+
+        function verCategorias() {
+            Livewire.emit('limpiarCategorias');
         }
 
         console.log('Hi!');

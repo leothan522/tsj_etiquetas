@@ -12,7 +12,7 @@
                 <button class="btn btn-tool" wire:click="destroy({{ $cliente_id }})"><i class="fas fa-trash-alt"></i> Eliminar</button>
                 <button class="btn btn-tool" wire:click="limpiar"><i class="fas fa-ban"></i> Cancelar</button>
             @else
-                <button class="btn btn-tool"><i class="fas fa-file"></i> Nuevo</button>
+                <button class="btn btn-tool" wire:click="prueba"><i class="fas fa-file"></i> Nuevo</button>
                 <button class="btn btn-tool"><i class="fas fa-edit"></i> Editar</button>
                 <button class="btn btn-tool"><i class="fas fa-ban"></i> Cancelar</button>
                 <button class="btn btn-tool"><i class="fas fa-trash-alt"></i> Eliminar</button>
