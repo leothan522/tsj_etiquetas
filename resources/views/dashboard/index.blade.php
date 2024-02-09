@@ -11,9 +11,9 @@
     <div class="visible-print">
         {!! QrCode::size(100)->generate("https://t.me/Leothan"); !!}
         <p class="text-lightblue"><i class="fab fa-telegram"></i> Telegram</p>
-        <p>
+        {{--<p>
             {{ nextCodigo(200) }}
-        </p>
+        </p>--}}
     </div>
 @endsection
 
