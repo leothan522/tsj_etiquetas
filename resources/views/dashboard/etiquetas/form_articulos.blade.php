@@ -187,7 +187,6 @@
                         </div>
 
                         <div class="col-md-12">
-                            <input type="text" wire:model="borrar_imagen">
                             <div class="input-group d-none">
                                 <div class="custom-file">
                                     <input type="file" wire:model="imagen" class="custom-file-input" id="customFileLangImagen"
