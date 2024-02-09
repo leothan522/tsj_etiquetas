@@ -39,7 +39,7 @@ class Articulo extends Model
 
     public function scopeBuscar($query, $keyword)
     {
-        return $query->where('codigo', 'LIKE', "%$keyword%")
+        return $query->where('identificador', 'LIKE', "%$keyword%")
             ->orWhere('descripcion', 'LIKE', "%$keyword%")
             ;
     }

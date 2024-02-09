@@ -1,18 +1,18 @@
 <div class="card card-outline card-navy" xmlns:wire="http://www.w3.org/1999/xhtml">
     <div class="card-header">
         <h3 class="card-title">
-            @if(/*$keyword*/false)
+            @if($keyword)
                 Resultados de la Búsqueda { <b class="text-danger">{{ $keyword }}</b> }
                 <button class="btn btn-tool text-danger" wire:click="cerrarBusqueda"><i class="fas fa-times-circle"></i>
                 </button>
             @else
-                Bienes Registrados [ <b class="text-navy">{{--{{ $rowsArticulos }}--}}</b> ]
+                Bienes Registrados [ <b class="text-navy">{{ $rowsArticulos }}</b> ]
             @endif
         </h3>
 
         <div class="card-tools pt-1">
             <ul class="pagination pagination-sm float-right">
-                {{--{{ $listarArticulos->links() }}--}}
+                {{ $listarArticulos->links() }}
             </ul>
         </div>
     </div>
@@ -26,19 +26,14 @@
             </tr>
             </thead>
             <tbody>
-            @if(/*$listarArticulos->isNotEmpty()*/ false)
+            @if($listarArticulos->isNotEmpty())
                 @foreach($listarArticulos as $articulo)
-                    <tr class="@if($articulo_id == $articulo->id) text-bold table-warning @endif">
-                        <td @if(!$articulo->estatus) class="text-muted text-sm" @endif>{{ $articulo->codigo }}</td>
-                        <td @if(!$articulo->estatus) class="text-muted text-sm" @endif>
-                            @if(!$articulo->estatus)
-                                <span class="btn-xs"><i class="fas fa-ban"></i></span>
-                            @endif
-                            {{ $articulo->descripcion }}
-                        </td>
+                    <tr class="@if($articulos_id == $articulo->id) text-bold table-warning @endif">
+                        <td>{{ $articulo->identificador }}</td>
+                        <td>{{ $articulo->descripcion }}</td>
                         <td class="justify-content-end">
                             <div class="btn-group">
-                                <button wire:click="showArticulos({{ $articulo->id }})" class="btn btn-primary btn-sm">
+                                <button wire:click="edit({{ $articulo->id }})" class="btn btn-primary btn-sm">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>

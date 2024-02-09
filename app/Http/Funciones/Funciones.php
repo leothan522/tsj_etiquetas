@@ -2,10 +2,10 @@
 //Funciones Personalizadas para el Proyecto
 
 use App\Models\Parametro;
-//use App\Models\Producto;
-//use App\Models\Stock;
 use Carbon\Carbon;
-//use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
+
 
 function hola(){
     return "Funciones Personalidas bien creada";
@@ -118,13 +118,18 @@ function verSpinner()
 function verImagen($path, $user = false)
 {
     if (!is_null($path)){
-        if (file_exists(public_path('storage/'.$path))){
-            return asset('storage/'.$path);
-        }else{
-            if ($user){
+        if ($user){
+            if (file_exists(public_path('storage/'.$path))){
+                return asset('storage/'.$path);
+            }else{
                 return asset('img/user.png');
             }
-            return asset('img/image.png');
+        }else{
+            if (file_exists(public_path($path))){
+                return asset($path);
+            }else{
+                return asset('img/img_placeholder.png');
+            }
         }
     }else{
         if ($user){
@@ -132,6 +137,23 @@ function verImagen($path, $user = false)
         }
         return asset('img/img_placeholder.png');
     }
+
+
+    /*if (!is_null($path)){
+        if (file_exists(public_path('storage/'.$path))){
+            return asset('storage/'.$path);
+        }else{
+            if ($user){
+                return asset('img/user.png');
+            }
+            return asset('img/img_placeholder.png');
+        }
+    }else{
+        if ($user){
+            return asset('img/user.png');
+        }
+        return asset('img/img_placeholder.png');
+    }*/
 }
 
 function verUtf8($string){
@@ -254,6 +276,92 @@ function nextCodigo($next = 1, $parametros_nombre = null, $parametros_tabla_id =
 
     return $codigo . $size;
 
+}
+
+function crearMiniaturas($imagen_data, $path_data)
+{
+    //ejemplo de path
+    //$miniatura = 'storage/productos/size_'.$nombreImagen;
+
+    //definir tamaños
+    $sizes = [
+        'mini' => [
+            'width' => 320,
+            'height' => 320,
+            'path' => str_replace('size_', 'mini_', $path_data)
+        ],
+        'detail' => [
+            'width' => 540,
+            'height' => 560,
+            'path' => str_replace('size_', 'detail_', $path_data)
+        ],
+        'cart' => [
+            'width' => 101,
+            'height' => 100,
+            'path' => str_replace('size_', 'cart_', $path_data)
+        ],
+        'banner' => [
+            'width' => 570,
+            'height' => 270,
+            'path' => str_replace('size_', 'banner_', $path_data)
+        ]
+    ];
+
+    $respuesta = array();
+
+    $image = ImageManager::gd()->read($imagen_data);
+    foreach ($sizes as $nombre => $items){
+        $width = null;
+        $height = null;
+        $path = null;
+        foreach ($items as $key => $valor){
+            if ($key == 'width') { $width = $valor; }
+            if ($key == 'height') { $height = $valor; }
+            if ($key == 'path') { $path = $valor; }
+        }
+        $respuesta[$nombre] = $path;
+        $image->resize($width, $height);
+        $image->save($path);
+    }
+
+    return $respuesta;
+
+}
+
+//borrar imagenes incluyendo las miniaturas
+function borrarImagenes($imagen, $carpeta)
+{
+    if ($imagen){
+        //reenplazamos storage por public
+        $imagen = str_replace('storage/', 'public/', $imagen);
+        //definir tamaños
+        $sizes = [
+            'mini' => [
+                'path' => str_replace($carpeta.'/', $carpeta.'/mini_', $imagen)
+            ],
+            'detail' => [
+                'path' => str_replace($carpeta.'/', $carpeta.'/detail_', $imagen)
+            ],
+            'cart' => [
+                'path' => str_replace($carpeta.'/', $carpeta.'/cart_', $imagen)
+            ],
+            'banner' => [
+                'path' => str_replace($carpeta.'/', $carpeta.'/banner_', $imagen)
+            ]
+        ];
+
+        $exite = Storage::exists($imagen);
+        if ($exite){
+            Storage::delete($imagen);
+        }
+
+        foreach ($sizes as $items){
+            $exite = Storage::exists($items['path']);
+            if ($exite){
+                Storage::delete($items['path']);
+            }
+        }
+    }
 }
 
 

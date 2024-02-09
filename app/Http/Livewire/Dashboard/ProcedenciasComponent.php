@@ -16,7 +16,7 @@ class ProcedenciasComponent extends Component
     protected $paginationTheme = 'bootstrap';
 
     protected $listeners = [
-        'confirmed', 'limpiarProcedencias'
+        'confirmed', 'limpiarProcedencias', 'selectProcedencias'
     ];
 
     public $nuevo = true, $editar = false, $keyword, $tabla_id;
@@ -64,6 +64,7 @@ class ProcedenciasComponent extends Component
         $row->save();
 
         $this->limpiarProcedencias();
+        $this->emit('selectProcedencias');
         $this->alert('success', 'Datos Guardados.');
     }
 
@@ -110,14 +111,21 @@ class ProcedenciasComponent extends Component
             ]);
         } else {
             $row->delete();
-            $this->alert('success', 'Procedencia Eliminada.');
             $this->limpiarProcedencias();
+            $this->emit('selectProcedencias');
+            $this->alert('success', 'Procedencia Eliminada.');
+
         }
     }
 
     public function buscar()
     {
         //$this->keyword
+    }
+
+    public function selectProcedencias()
+    {
+        //JS
     }
 
 

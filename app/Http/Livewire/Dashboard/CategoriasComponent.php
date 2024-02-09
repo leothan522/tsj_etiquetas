@@ -17,7 +17,7 @@ class CategoriasComponent extends Component
     protected $paginationTheme = 'bootstrap';
 
     protected $listeners = [
-        'confirmed', 'limpiarCategorias'
+        'confirmed', 'limpiarCategorias', 'selectCategorias'
     ];
 
     public $nuevo = true, $editar = false, $keyword, $tabla_id;
@@ -65,6 +65,7 @@ class CategoriasComponent extends Component
         $row->save();
 
         $this->limpiarCategorias();
+        $this->emit('selectCategorias');
         $this->alert('success', 'Datos Guardados.');
     }
 
@@ -111,6 +112,7 @@ class CategoriasComponent extends Component
             ]);
         } else {
             $row->delete();
+            $this->emit('selectCategorias');
             $this->alert('success', 'Categoria Eliminada.');
             $this->limpiarCategorias();
         }
@@ -119,6 +121,11 @@ class CategoriasComponent extends Component
     public function buscar()
     {
         //$this->keyword
+    }
+
+    public function selectCategorias()
+    {
+        //JS
     }
 
 
