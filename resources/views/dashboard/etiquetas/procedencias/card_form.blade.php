@@ -4,14 +4,14 @@
         @if($editar)
             <h3 class="card-title">Editar</h3>
             <div class="card-tools">
-                <button class="btn btn-tool" wire:click="limpiarCategorias">
+                <button class="btn btn-tool" wire:click="limpiarProcedencias">
                     <i class="fas fa-ban"></i> Cancelar
                 </button>
             </div>
             @else
-            <h3 class="card-title">Crear Categoria</h3>
+            <h3 class="card-title">Crear Procedencia</h3>
             <div class="card-tools">
-                <span class="btn btn-tool" wire:click="limpiarCategorias"><i class="fas fa-sync-alt"></i></span>
+                <span class="btn btn-tool" wire:click="limpiarProcedencias"><i class="fas fa-sync-alt"></i></span>
             </div>
         @endif
     </div>
@@ -55,7 +55,7 @@
 
             <div class="form-group mt-3">
                 <button type="submit" class="btn btn-block @if($nuevo) btn-success @else btn-primary @endif"
-                @if(!comprobarPermisos('categoria.create')) disabled @endif >
+                @if(!comprobarPermisos('procedencia.create')) disabled @endif >
                     <i class="fas fa-save"></i> Guardar @if($tabla_id) Cambios @endif
                 </button>
             </div>

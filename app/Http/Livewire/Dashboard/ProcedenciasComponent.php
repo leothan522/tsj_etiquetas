@@ -2,22 +2,21 @@
 
 namespace App\Http\Livewire\Dashboard;
 
-use App\Models\Categoria;
+use App\Models\Procedencia;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class CategoriasComponent extends Component
+class ProcedenciasComponent extends Component
 {
-
     use LivewireAlert;
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
 
     protected $listeners = [
-        'confirmed', 'limpiarCategorias'
+        'confirmed', 'limpiarProcedencias'
     ];
 
     public $nuevo = true, $editar = false, $keyword, $tabla_id;
@@ -25,14 +24,14 @@ class CategoriasComponent extends Component
 
     public function render()
     {
-        $listarRows = Categoria::buscar($this->keyword)->orderBy('codigo', 'ASC')->get();
-        $rows = Categoria::count();
-        return view('livewire.dashboard.categorias-component')
+        $listarRows = Procedencia::buscar($this->keyword)->orderBy('codigo', 'ASC')->get();
+        $rows = Procedencia::count();
+        return view('livewire.dashboard.procedencias-component')
             ->with('listarRows', $listarRows)
             ->with('rows', $rows);
     }
 
-    public function limpiarCategorias()
+    public function limpiarProcedencias()
     {
         $this->reset([
             'nuevo', 'editar', 'keyword', 'tabla_id',
@@ -44,7 +43,7 @@ class CategoriasComponent extends Component
     protected function rules()
     {
         return [
-            'codigo' => ['required', 'min:4', 'max:8', 'alpha_num:ascii', Rule::unique('categorias', 'codigo')->ignore($this->tabla_id)],
+            'codigo' => ['required', 'min:4', 'max:8', 'alpha_num:ascii', Rule::unique('procedencias', 'codigo')->ignore($this->tabla_id)],
             'nombre' => 'required|min:4',
         ];
     }
@@ -55,22 +54,22 @@ class CategoriasComponent extends Component
 
         if ($this->tabla_id) {
             //editar
-            $row = Categoria::find($this->tabla_id);
+            $row = Procedencia::find($this->tabla_id);
         } else {
             //nuevo
-            $row = new Categoria();
+            $row = new Procedencia();
         }
         $row->codigo = $this->codigo;
         $row->nombre = $this->nombre;
         $row->save();
 
-        $this->limpiarCategorias();
+        $this->limpiarProcedencias();
         $this->alert('success', 'Datos Guardados.');
     }
 
     public function edit($id)
     {
-        $row = Categoria::find($id);
+        $row = Procedencia::find($id);
         $this->tabla_id = $row->id;
         $this->codigo = $row->codigo;
         $this->nombre = $row->nombre;
@@ -94,7 +93,7 @@ class CategoriasComponent extends Component
 
     public function confirmed()
     {
-        $row = Categoria::find($this->tabla_id);
+        $row = Procedencia::find($this->tabla_id);
 
         //codigo para verificar si realmente se puede borrar, dejar false si no se requiere validacion
         $vinculado = false;
@@ -111,8 +110,8 @@ class CategoriasComponent extends Component
             ]);
         } else {
             $row->delete();
-            $this->alert('success', 'Categoria Eliminada.');
-            $this->limpiarCategorias();
+            $this->alert('success', 'Procedencia Eliminada.');
+            $this->limpiarProcedencias();
         }
     }
 

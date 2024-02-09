@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal fade" id="modal-categorias" xmlns:wire="http://www.w3.org/1999/xhtml">
+<div wire:ignore.self class="modal fade" id="modal-procedencias" xmlns:wire="http://www.w3.org/1999/xhtml">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,7 +6,7 @@
 
                     <div class="col-md-6">
                         <h4 class="modal-title">
-                            Categorias
+                            Procedencias
                         </h4>
                     </div>
                     <div class="col-md-5 justify-content-end">
@@ -31,10 +31,10 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        @include('dashboard.etiquetas.categorias.card_form')
+                        @include('dashboard.etiquetas.procedencias.card_form')
                     </div>
                     <div class="col-md-8">
-                        @include('dashboard.etiquetas.categorias.card_table')
+                        @include('dashboard.etiquetas.procedencias.card_table')
                     </div>
                 </div>
 

@@ -9,6 +9,7 @@
 @section('content')
     @livewire('dashboard.etiquetas-component')
     @livewire('dashboard.categorias-component')
+    @livewire('dashboard.procedencias-component')
 @endsection
 
 @section('right-sidebar')
@@ -40,6 +41,10 @@
 
         function verCategorias() {
             Livewire.emit('limpiarCategorias');
+        }
+
+        function verProcedencias() {
+            Livewire.emit('limpiarProcedencias');
         }
 
         console.log('Hi!');
