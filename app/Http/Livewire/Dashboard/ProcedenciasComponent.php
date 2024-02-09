@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Models\Articulo;
 use App\Models\Procedencia;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -26,6 +27,9 @@ class ProcedenciasComponent extends Component
     {
         $listarRows = Procedencia::buscar($this->keyword)->orderBy('codigo', 'ASC')->get();
         $rows = Procedencia::count();
+        $listarRows->each(function ($row){
+            $row->cantidad = Articulo::where('procedencias_id', $row->id)->count();
+        });
         return view('livewire.dashboard.procedencias-component')
             ->with('listarRows', $listarRows)
             ->with('rows', $rows);
@@ -98,6 +102,10 @@ class ProcedenciasComponent extends Component
 
         //codigo para verificar si realmente se puede borrar, dejar false si no se requiere validacion
         $vinculado = false;
+        $articulo = Articulo::where('procedencias_id', $row->id)->first();
+        if ($articulo){
+            $vinculado = true;
+        }
 
         if ($vinculado) {
             $this->alert('warning', '¡No se puede Borrar!', [

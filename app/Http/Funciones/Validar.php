@@ -27,6 +27,15 @@ function allPermisos()
                 'Eliminar Usuarios' => 'usuarios.destroy',
             ]
         ],
+        'Etiquetas' => [
+            'route' => 'etiquetas.index',
+            'submenu' => [
+                '[Crear][Editar] Bien' => 'articulos.create',
+                'Eliminar Bien' => 'articulos.destroy',
+                '[CRUD] Categorias' => 'categorias.index',
+                '[CRUD] Procedencia' => 'procedencias.index',
+            ]
+        ],
     ];
     return $permisos;
 }

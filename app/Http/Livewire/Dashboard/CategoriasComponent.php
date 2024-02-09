@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Models\Articulo;
 use App\Models\Categoria;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -27,6 +28,9 @@ class CategoriasComponent extends Component
     {
         $listarRows = Categoria::buscar($this->keyword)->orderBy('codigo', 'ASC')->get();
         $rows = Categoria::count();
+        $listarRows->each(function ($row){
+            $row->cantidad = Articulo::where('categorias_id', $row->id)->count();
+        });
         return view('livewire.dashboard.categorias-component')
             ->with('listarRows', $listarRows)
             ->with('rows', $rows);
@@ -99,6 +103,10 @@ class CategoriasComponent extends Component
 
         //codigo para verificar si realmente se puede borrar, dejar false si no se requiere validacion
         $vinculado = false;
+        $articulo = Articulo::where('categorias_id', $row->id)->first();
+        if ($articulo){
+            $vinculado = true;
+        }
 
         if ($vinculado) {
             $this->alert('warning', '¡No se puede Borrar!', [

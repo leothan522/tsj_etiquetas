@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('codigo');
             $table->string('nombre');
+            $table->integer('cantidad')->nullable();
             $table->timestamps();
         });
         DB::table("procedencias")

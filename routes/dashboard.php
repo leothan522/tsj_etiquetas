@@ -39,9 +39,13 @@ Route::middleware([
 
     Route::get('clientes', [ ClientesController::class, 'index'])->name('clientes.index');
     Route::get('etiquetas', [EtiquetasController::class, 'index'])->name('etiquetas.index');
+    Route::get('etiquetas/{id}', [EtiquetasController::class, 'printEtiqueta'])->name('etiquetas.print');
+    Route::get('etiquetas/{id}/consultar', [EtiquetasController::class, 'webEtiqueta'])->name('etiquetas.web');
 
 });
 
 Route::get('dashboard/perfil', [UsuariosController::class, 'perfil'])->middleware('auth')->name('usuarios.perfil');
 Route::get('chat-directo/{id?}', [ChatController::class, 'index'])->middleware(['user.android'])->name('chat.directo');
+
+Route::get('etiquetas/{id}/consultar', [EtiquetasController::class, 'webEtiqueta'])->name('etiquetas.web');
 

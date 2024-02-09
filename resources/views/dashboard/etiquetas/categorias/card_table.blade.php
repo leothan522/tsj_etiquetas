@@ -36,12 +36,12 @@
                         <td class="justify-content-end">
                             <div class="btn-group">
                                 <button wire:click="edit({{ $categoria->id }})" class="btn btn-primary btn-sm"
-                                @if(!comprobarPermisos('categorias.create')) disabled @endif >
+                                {{--@if(!comprobarPermisos('categorias.create')) disabled @endif--}} >
                                     <i class="fas fa-edit"></i>
                                 </button>
 
                                 <button wire:click="destroy({{ $categoria->id }})" class="btn btn-primary btn-sm"
-                                @if(!comprobarPermisos('categorias.destroy')) disabled @endif >
+                                {{--@if(!comprobarPermisos('categorias.destroy')) disabled @endif--}} >
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </div>

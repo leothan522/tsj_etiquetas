@@ -55,7 +55,7 @@
 
             <div class="form-group mt-3">
                 <button type="submit" class="btn btn-block @if($nuevo) btn-success @else btn-primary @endif"
-                @if(!comprobarPermisos('categoria.create')) disabled @endif >
+                {{--@if(!comprobarPermisos('categoria.create')) disabled @endif--}} >
                     <i class="fas fa-save"></i> Guardar @if($tabla_id) Cambios @endif
                 </button>
             </div>

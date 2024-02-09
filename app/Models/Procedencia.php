@@ -13,6 +13,7 @@ class Procedencia extends Model
     protected $fillable = [
         'codigo',
         'nombre',
+        'cantidad',
     ];
 
     public function articulos(): HasMany

@@ -89,6 +89,22 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="email">Serial:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-bookmark"></i></span>
+                            </div>
+                            <input type="text" class="form-control" wire:model.defer="serial" placeholder="Serial">
+                            @error('serial')
+                            <span class="col-sm-12 text-sm text-bold text-danger">
+                                <i class="icon fas fa-exclamation-triangle"></i>
+                                {{ $message }}
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="email">Marca:</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -112,22 +128,6 @@
                             </div>
                             <input type="text" class="form-control" wire:model.defer="modelo" placeholder="Modelo (Opcional)">
                             @error('modelo')
-                            <span class="col-sm-12 text-sm text-bold text-danger">
-                                <i class="icon fas fa-exclamation-triangle"></i>
-                                {{ $message }}
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Serial:</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="far fa-bookmark"></i></span>
-                            </div>
-                            <input type="text" class="form-control" wire:model.defer="serial" placeholder="Serial (Opcional)">
-                            @error('serial')
                             <span class="col-sm-12 text-sm text-bold text-danger">
                                 <i class="icon fas fa-exclamation-triangle"></i>
                                 {{ $message }}
@@ -245,8 +245,9 @@
 
 <div class="row justify-content-end">
         <div class="col-md-4">
-            <button type="submit" class="btn btn-block btn-success float-right mr-1">
-                <i class="fas fa-save"></i> Guardar
+            <button type="submit" class="btn btn-block @if($nuevo) btn-success @else btn-primary @endif float-right mr-1"
+                    @if(!comprobarPermisos('articulos.create')) disabled @endif >
+                <i class="fas fa-save"></i> Guardar @if($editar) Cambios @endif
             </button>
         </div>
     </div>

@@ -60,13 +60,13 @@ class EtiquetasComponent extends Component
     protected function rules()
     {
         return [
-            'identificador' => ['required', 'min:4', 'max:8', 'alpha_num:ascii', Rule::unique('articulos', 'identificador')->ignore($this->articulos_id)],
+            'identificador' => ['required', 'min:4', 'max:12', 'alpha_num:ascii', Rule::unique('articulos', 'identificador')->ignore($this->articulos_id)],
             'descripcion' => 'required|min:4|max:40',
             'categorias_id' => 'required',
             'procedencias_id' => 'required',
             'marca' => 'nullable|max:40',
             'modelo' => 'nullable|max:40',
-            'serial' => 'nullable|max:40',
+            'serial' => 'required|max:40',
             'imagen' => 'image|max:1024|nullable',
             'color' => 'nullable|max:40',
         ];
@@ -106,24 +106,25 @@ class EtiquetasComponent extends Component
             $articulo->detail = $miniatura['detail'];
             $articulo->cart = $miniatura['cart'];
             $articulo->banner = $miniatura['banner'];
+            //borramos imagenes anteriones si existen
+            if ($imagen){
+                borrarImagenes($this->borrar_imagen, 'articulos');
+            }
         } else {
-            if ($this->borrar_imagen){
+            if (!$this->verMini){
                 $articulo->imagen = null;
                 $articulo->mini = null;
                 $articulo->detail = null;
                 $articulo->cart = null;
                 $articulo->banner = null;
+                borrarImagenes($this->borrar_imagen, 'articulos');
             }
-        }
-        //borramos imagenes anteriones si existen
-        if ($this->borrar_imagen){
-            borrarImagenes($this->borrar_imagen, 'articulos');
         }
 
 
         $articulo->save();
 
-        $this->limpiarArticulos();
+        $this->edit($articulo->id);
         $this->alert('success', 'Datos Guardados.');
     }
 
@@ -143,8 +144,8 @@ class EtiquetasComponent extends Component
         $this->serial = $articulo->serial;
         $this->verMini = $articulo->mini;
         $this->borrar_imagen = $articulo->imagen;
-        $this->borrar_path = "articulos/$this->identificador";
         $this->color = $articulo->color;
+        $this->adicional = $articulo->adicional;
         $this->emit('setSelectCategorias', $this->categorias_id);
         $this->emit('setSelectProcedencias', $this->procedencias_id);
         $this->nuevo = false;
@@ -274,7 +275,7 @@ class EtiquetasComponent extends Component
     public function initSelectProcedencias()
     {
         //$this->reset();
-        $listarRows = Procedencia::orderBy('nombre', 'ASC')->get();
+        $listarRows = Procedencia::orderBy('nombre', 'DESC')->get();
         $data = array();
         foreach ($listarRows as $row) {
             $option = [

@@ -15,13 +15,16 @@
             {{--<button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
             </button>--}}
             @if(!$nuevo)
-                <button class="btn btn-tool" wire:click="create"><i class="fas fa-file"></i> Nuevo</button>
+                <button class="btn btn-tool" wire:click="create">
+                    <i class="fas fa-file"></i> Nuevo</button>
             @endif
             @if($editar)
-                <button class="btn btn-tool" wire:click="destroy({{ $articulos_id }})"><i class="fas fa-trash-alt"></i>
+                <button class="btn btn-tool" wire:click="destroy({{ $articulos_id }})"
+                        @if(!comprobarPermisos('articulos.destroy')) disabled @endif >
+                    <i class="fas fa-trash-alt"></i>
                     Eliminar
                 </button>
-                <button class="btn btn-tool"><i class="fas fa-print"></i> Imprimir Etiqueta</button>
+                <a href="{{ route('etiquetas.print', $articulos_id) }}" target="_blank" class="btn btn-tool"><i class="fas fa-print"></i> Imprimir Etiqueta</a>
             @endif
 
             @if($nuevo || $editar)
