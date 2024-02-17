@@ -115,7 +115,7 @@ function verSpinner()
     return $spinner;
 }
 
-function verImagen($path, $user = false)
+function verImagen($path, $user = false, $web = null)
 {
     if (!is_null($path)){
         if ($user){
@@ -128,32 +128,24 @@ function verImagen($path, $user = false)
             if (file_exists(public_path($path))){
                 return asset($path);
             }else{
-                return asset('img/img_placeholder.png');
+                if (is_null($web)){
+                    return asset('img/img_placeholder.png');
+                }else{
+                    return asset('img/web_img_placeholder.jpg');
+                }
+
             }
         }
     }else{
         if ($user){
             return asset('img/user.png');
         }
-        return asset('img/img_placeholder.png');
-    }
-
-
-    /*if (!is_null($path)){
-        if (file_exists(public_path('storage/'.$path))){
-            return asset('storage/'.$path);
-        }else{
-            if ($user){
-                return asset('img/user.png');
-            }
+        if (is_null($web)){
             return asset('img/img_placeholder.png');
+        }else{
+            return asset('img/web_img_placeholder.jpg');
         }
-    }else{
-        if ($user){
-            return asset('img/user.png');
-        }
-        return asset('img/img_placeholder.png');
-    }*/
+    }
 }
 
 function verUtf8($string){
